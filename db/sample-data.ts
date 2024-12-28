@@ -10,7 +10,7 @@ const sampleData = {
         "/images/sample-products/p1-2.jpg",
       ],
       price: {
-        regularPrice: 10
+        regularPrice: "10"
       },
       brand: "Polo",
       rating: 4.5,
@@ -29,8 +29,8 @@ const sampleData = {
         "/images/sample-products/p2-2.jpg",
       ],
       price: {
-        regularPrice: 10.55,
-        discountedPrice: 8.50,
+        regularPrice: "10.55",
+        discountedPrice: "8.50",
       },
       brand: "Brooks Brothers",
       rating: 4.2,
@@ -49,7 +49,7 @@ const sampleData = {
         "/images/sample-products/p3-2.jpg",
       ],
       price: {
-        regularPrice: 109.99,
+        regularPrice:"109.99",
       },
       brand: "Tommy Hilfiger",
       rating: 4.9,
@@ -68,8 +68,8 @@ const sampleData = {
         "/images/sample-products/p4-2.jpg",
       ],
       price: {
-        regularPrice: 55.79,
-        discountedPrice: 49.99,
+        regularPrice: "55.79",
+        discountedPrice: "49.99",
       },
       brand: "Calvin Klein",
       rating: 3.6,
@@ -88,7 +88,7 @@ const sampleData = {
         "/images/sample-products/p5-2.jpg",
       ],
       price: {
-        regularPrice: 10,
+        regularPrice: "10",
       },
       brand: "Polo",
       rating: 4.7,
@@ -107,7 +107,7 @@ const sampleData = {
         "/images/sample-products/p6-2.jpg",
       ],
       price: {
-        regularPrice: 99.7,
+        regularPrice: "99.7",
       },
       brand: "Polo",
       rating: 4.6,
@@ -115,8 +115,8 @@ const sampleData = {
       stock: 8,
       isFeatured: true,
       banner: null,
-    },
-  ],
+    }
+  ]
 };
 
 export default sampleData;

@@ -2,8 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import ProuductPrice from "./product-price";
-import { Button } from "@/components/ui/button";
-const ProductCard = ({ product }: { product: any }) => {
+import ProductRequest from "./product-request";
+import { Product } from "@/types";
+
+const ProductCard = ({ product }: { product: Product }) => {
+ 
   return (
     <Card className=" w-full max-w-sm">
       <CardHeader className=" p-0  items-center ">
@@ -46,7 +49,7 @@ const ProductCard = ({ product }: { product: any }) => {
             )
           ) : (
             <div className=" flex-between">
-              <Button variant="ghost"> Make Request</Button>
+              <ProductRequest />
               <p className="text-destructive font-bold text-sm">Out Of Stock</p>
             </div>
           )}
