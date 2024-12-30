@@ -102,7 +102,7 @@
   }
 }
 .discounted-Price::before {
-      content: "";
+    content: "";
     position: absolute;
     top: 31%;
     left: 0;
