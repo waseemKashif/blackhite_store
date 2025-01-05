@@ -20,7 +20,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           />
         </Link>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-3 sm:p-6">
         <div className=" text-xs">{product.brand}</div>
         <Link href={`/product/${product.slug}`}>
           <h2

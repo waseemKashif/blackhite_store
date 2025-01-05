@@ -30,8 +30,8 @@ const ProductCheckStock = ({
           <ProuductPrice price={product?.regularPrice} />
         )
       ) : (
-        <div className=" flex-between">
-          <ProductRequest />
+        <div className=" flex-between sm:flex-row flex-col">
+          <ProductRequest className="sm:block hidden" />
           <p className="text-destructive font-bold text-sm">Out Of Stock</p>
         </div>
       )}

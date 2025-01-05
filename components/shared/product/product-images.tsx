@@ -15,7 +15,7 @@ const [current,setCurrent] = useState(0);
           height={1000}
           className=" min-h-[300px] object-cover object-center"
         />
-        <div className=" flex gap-x-1">
+        <div className="flex">
             {
                 images.map((image,index)=>(
                     <div key={image} role="button" tabIndex={0} onClick={()=>setCurrent(index)} className={cn(' border mr-2  cursor-pointer hover:border-orange-600', current === index && 'border-orange-500')}>
