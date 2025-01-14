@@ -19,16 +19,33 @@ export const insertProductSchema = z.object({
   isFeatured: z.boolean(),
   banner: z.string().nullable(),
   regularPrice: currency,
-  discountedPrice: z.string()
-  .refine(
-    (value) => /^\d+(\.\d{2})?$/.test(formatNumberWithDecimal(Number(value))),
-    "Price must have two decimal places"
-  ).nullable()
+  discountedPrice: z
+    .string()
+    .refine(
+      (value) => /^\d+(\.\d{2})?$/.test(formatNumberWithDecimal(Number(value))),
+      "Price must have two decimal places"
+    )
+    .nullable(),
 });
 
-// Schema for sign in of user 
+// Schema for sign in of user
 
 export const signInFormSchema = z.object({
-  email: z.string().email('Invalid Email address'),
-  password: z.string().min(6,'passowrd must be at least 6 characters')
-})
+  email: z.string().email("Invalid Email address"),
+  password: z.string().min(6, "passowrd must be at least 6 characters"),
+});
+
+// schema for sign up for user, user registeration
+export const signUpFormSchema = z
+  .object({
+    name: z.string().min(3, "Name must be at least 2 characters"),
+    email: z.string().email("Invalid Email address"),
+    password: z.string().min(6, "passowrd must be at least 6 characters"),
+    confirmPassword: z
+      .string()
+      .min(6, " confirm password must be at least 6 characters"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Password don't matches",
+    path: ["confirmPassword"],
+  });
