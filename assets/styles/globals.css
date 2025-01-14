@@ -10,6 +10,7 @@
   .flex-start {
     @apply flex justify-start items-center;
   }
+
   .flex-center {
     @apply flex justify-center items-center;
   }
@@ -59,6 +60,7 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -97,17 +99,35 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
+
 .discounted-Price::before {
-    content: "";
-    position: absolute;
-    top: 31%;
-    left: 0;
-    width: 100%;
-    border-bottom: 2px solid red;
-    transform: rotate(9deg);
-    transform-origin: left center;
+  content: "";
+  position: absolute;
+  top: 31%;
+  left: 0;
+  width: 100%;
+  border-bottom: 2px solid red;
+  transform: rotate(9deg);
+  transform-origin: left center;
+}
+
+#signUpForm label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  color: #888;
+}
+
+.relative:focus-within .label, .moveLabelAbove{
+  top: 0px !important;
+  font-size: 13px;
+  background: #fff;
+  padding: 0px 7px;
 }
