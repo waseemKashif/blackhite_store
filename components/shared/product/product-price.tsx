@@ -6,7 +6,7 @@ import { formatNumberWithDecimal } from "@/lib/utils";
     const [intValue,floatValue]=finalPrice?.split('.');
    return (
      <p className={cn(" text-xl sm:text-2xl", className)}>
-       <span className=" text-xs align-super">QAR</span>
+       <span className=" text-xs align-super mr-1">QAR</span>
        {intValue}
        <span className=" text-xs align-super">.{floatValue}</span>
      </p>

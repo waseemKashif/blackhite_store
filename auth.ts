@@ -1,9 +1,10 @@
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/db/prisma";
-import  CredentialsProviders  from "next-auth/providers/credentials";
+import CredentialsProviders from "next-auth/providers/credentials";
 import { compareSync } from "bcrypt-ts-edge";
 import type { NextAuthConfig } from "next-auth";
+import { split } from "postcss/lib/list";
 export const config = {
   pages: {
     signIn: "/sign-in",
@@ -53,15 +54,34 @@ export const config = {
     }),
   ],
   callbacks: {
-    async session({ session, user, trigger,token}:any) {
-        // set the user id from the token
-        session.user.id = token.sub;
-
-        // if there is any update, set user name 
-        if(trigger === 'update'){
-            session.user.name = user.name; 
-        }
+    async session({ session, user, trigger, token }: any) {
+      // set the user id from the token
+      session.user.id = token.sub;
+      session.user.role = token.role;
+      session.user.name = token.name;
+      // if there is any update, set user name
+      if (trigger === "update") {
+        session.user.name = user.name;
+      }
       return session;
+    },
+    async jwt({ token, user, trigger, session }): any {
+      // assign user fields to the token
+      if (user) {
+        token.role = user.role;
+        // if user do not have a name then user the email
+        if (user.name === "NO_NAME") {
+          token.name = user.email!.split("@")[0];
+
+          // update the database to reflect the token name
+          await prisma.user.update({
+            where: { id: user.id },
+            // change this field
+            data: { name: token.name },
+          });
+        }
+      }
+      return token;
     },
   },
 } satisfies NextAuthConfig;
