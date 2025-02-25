@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/assets/styles/globals.css";
-import { APP_NAME, SERVER_URL , APP_DESCRIPTION} from "@/lib/constants";
+import { APP_NAME, SERVER_URL, APP_DESCRIPTION } from "@/lib/constants";
 import { ThemeProvider } from "next-themes";
+import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: {
     template: `%s | BLACKHITE`,
     default: APP_NAME,
   },
-  description:APP_DESCRIPTION,
+  description: APP_DESCRIPTION,
   metadataBase: new URL(SERVER_URL),
 };
 
@@ -21,12 +22,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
-        <ThemeProvider attribute='class'
-        defaultTheme="light" enableSystem disableTransitionOnChange>
-
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster />
         </ThemeProvider>
-        </body>
+      </body>
     </html>
   );
 }

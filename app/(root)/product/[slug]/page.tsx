@@ -1,12 +1,11 @@
 import { getProductBySlug } from "@/lib/actions/product.actions";
 import { notFound } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import ProductCheckStock from "@/components/shared/product/product-checkStock";
 import ProuductPrice from "@/components/shared/product/product-price";
 import ProductImages from "@/components/shared/product/product-images";
-
+import AddToCart from "@/components/shared/product/add-to-cart";
 const ProductDetailsPage = async (props: {
   params: Promise<{ slug: string }>;
 }) => {
@@ -26,8 +25,8 @@ const ProductDetailsPage = async (props: {
         <div className="grid grid-cols-1 md:grid-cols-5">
           {/* images column 2 of 5 columns */}
           <div className="col-span-2">
-            <ProductImages images={product.images}/>
-            </div>
+            <ProductImages images={product.images} />
+          </div>
           <div className="col-span-2 p-5">
             {/* details of product */}
             <div className="flex flex-col gap-4">
@@ -72,7 +71,10 @@ const ProductDetailsPage = async (props: {
                 {product.stock > 0 ? (
                   <div className="mb-2 flex justify-between">
                     <div className=" text-gray-500">Stock</div>
-                    <Badge variant="default" className=" bg-green-600"> In Stock</Badge>
+                    <Badge variant="default" className=" bg-green-600">
+                      {" "}
+                      In Stock
+                    </Badge>
                   </div>
                 ) : (
                   <div className="mb-2 flex justify-between">
@@ -89,13 +91,21 @@ const ProductDetailsPage = async (props: {
                     />
                   </div>
                 )}
-                {
-                  product.stock > 0 && (
-                    <div className=" flex-center">
-                        <Button className=" w-full">Add To Cart</Button>
-                    </div>
-                  )
-                }
+                {product.stock > 0 && (
+                  <div className=" flex-center">
+                    <AddToCart
+                      item={{
+                        productId: product.id,
+                        name: product.name,
+                        slug: product.slug,
+                        regularPrice: product.regularPrice,
+                        qty: 1,
+                        image: product.images[0],
+                        discountedPrice: product.discountedPrice || product.regularPrice,
+                      }}
+                    />
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
