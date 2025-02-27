@@ -3,7 +3,7 @@ import { formatNumberWithDecimal } from "./utils";
 
 // schema for inserting products
 const currency = z
-  .string()
+  .string().min(1, "Price is required")
   .refine(
     (value) => /^\d+(\.\d{2})?$/.test(formatNumberWithDecimal(Number(value))),
     "Price must have two decimal places"
@@ -74,7 +74,8 @@ export const insertCartSchema = z.object({
   itemsPrice: currency,
   totalPrice: currency,
   shippingPrice: currency,
-  taxPrice: currency,
+  // taxPrice: currency.optional()
+  //   .nullable(),
   sessionCartId: z.string().min(1, "session cart id is required"),
   userId: z.string().optional().nullable(),
 });
