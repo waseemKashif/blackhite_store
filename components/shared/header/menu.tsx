@@ -36,6 +36,7 @@ const Menu = () => {
                 <ShoppingCart /> cart{" "}
               </Link>
             </Button>
+            <UserButton />
           </SheetContent>
         </Sheet>
       </nav>
