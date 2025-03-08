@@ -133,8 +133,25 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
             <CardContent className="p-4 gap-4">
               <div className="pb-3 text-xl">
                 Subtotal ({cart?.items.reduce((acc, item) => acc + item.qty, 0)}{" "}
-                ):
+                ):{" "}
+                <span className="font-bold">
+                  {formatCurrency(cart.itemsPrice)}
+                </span>
               </div>
+              <Button
+                className=" w-full"
+                disabled={cart?.items?.length === 0 || isPending}
+                onClick={() =>
+                  startTransition(() => router.push("/shipping-address"))
+                }
+              >
+                
+                {isPending ? (
+                  <LoaderCircle size={20} className=" animate-spin" />
+                ) : (
+                  <ArrowRight size={20} />
+                )} Proceed to checkout
+              </Button>
             </CardContent>
           </Card>
         </div>
