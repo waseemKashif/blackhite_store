@@ -84,6 +84,7 @@ export const insertCartSchema = z.object({
 // schema for adding user shipping address 
 export const shippingAddressSchema = z.object({
   fullName: z.string().min(3, "Name must be at least 3 characters"),
+  phone:z.string().min(8, "Phone number must be at least 8 characters"),
   // fullAddress: z.string().min(3, "Full address must be at least 3 characters"),
   streetAddress: z.string().min(3, "Street address must be at least 3 characters"),
   // buildingNumber: z.string().min(3, "Building number must be at least 3 characters"),
@@ -92,7 +93,7 @@ export const shippingAddressSchema = z.object({
   // state: z.string().min(3, "State must be at least 3 characters"),
   country: z.string().min(3, "Country must be at least 3 characters").default("Qatar"),
   isDefault: z.boolean(),
-  postalCode: z.string().min(3, "Postal code must be at least 3 characters").optional().nullable(),
+  postalCode: z.string().optional().nullable(),
   lat: z.number().optional().nullable(),
   lng: z.number().optional().nullable(),
 })
