@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { formatNumberWithDecimal } from "./utils";
+import build from "next/dist/build";
 
 // schema for inserting products
 const currency = z
@@ -79,3 +80,20 @@ export const insertCartSchema = z.object({
   sessionCartId: z.string().min(1, "session cart id is required"),
   userId: z.string().optional().nullable(),
 });
+
+// schema for adding user shipping address 
+export const shippingAddressSchema = z.object({
+  fullName: z.string().min(3, "Name must be at least 3 characters"),
+  phone:z.string().min(8, "Phone number must be at least 8 characters"),
+  // fullAddress: z.string().min(3, "Full address must be at least 3 characters"),
+  streetAddress: z.string().min(3, "Street address must be at least 3 characters"),
+  // buildingNumber: z.string().min(3, "Building number must be at least 3 characters"),
+  // block: z.string().min(3, "Block must be at least 3 characters").optional().nullable(),
+  city: z.string().min(3, "City must be at least 3 characters").default("Doha"),
+  // state: z.string().min(3, "State must be at least 3 characters"),
+  country: z.string().min(3, "Country must be at least 3 characters").default("Qatar"),
+  isDefault: z.boolean(),
+  postalCode: z.string().optional().nullable(),
+  lat: z.number().optional().nullable(),
+  lng: z.number().optional().nullable(),
+})

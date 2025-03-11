@@ -1,3 +1,4 @@
+
 export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || "BLACKHITE WAS";
 export const APP_DESCRIPTION =
   process.env.NEXT_PUBLIC_APP_DESCRIPTION ||
@@ -8,8 +9,8 @@ export const LATEST_PRODUCTS_LIMIT = Number(
   process.env.LATEST_PRODUCTS_LIMIT || 6
 );
 export const signInDefaultValues = {
-  email: "waseemkashif7@gmail.com",
-  password: "12345678",
+  email: "",
+  password: "",
 };
 export const signUpDefaultValues = {
   name: "",
@@ -17,3 +18,12 @@ export const signUpDefaultValues = {
   password: "",
   confirmPassword: "",
 };
+export const shippingAddressDefaultValues = {
+  fullname: "",
+  steetAddress: "",
+  phone: "",
+  city: "",
+  country: "",
+ postalCode: "",
+  isDefault: false,
+}
