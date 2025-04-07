@@ -1,4 +1,3 @@
-
 export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || "BLACKHITE WAS";
 export const APP_DESCRIPTION =
   process.env.NEXT_PUBLIC_APP_DESCRIPTION ||
@@ -24,6 +23,12 @@ export const shippingAddressDefaultValues = {
   phone: "",
   city: "",
   country: "",
- postalCode: "",
+  postalCode: "",
   isDefault: false,
-}
+};
+
+export const PAYMENT_METHODS = process.env.PAYMENT_METHODS
+  ? process.env.PAYMENT_METHODS.split(", ")
+  : ["PayPal", "Stripe", "CashOnDelivery", "CredOnDelivery"];
+
+export const DEFAULT_PAYMENT_METHOD = process.env.DEFAULT_PAYMENT_METHOD || "CardOnDelivery";

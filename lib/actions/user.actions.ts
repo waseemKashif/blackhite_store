@@ -1,6 +1,12 @@
 "use server";
 
-import { shippingAddressSchema, signInFormSchema, signUpFormSchema } from "../validators";
+import {
+  shippingAddressSchema,
+  signInFormSchema,
+  signUpFormSchema,
+  paymentMethodSchema,
+} from "../validators";
+import { z } from "zod";
 import { auth, signIn, signOut } from "@/auth";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { hashSync } from "bcrypt-ts-edge";
@@ -72,35 +78,58 @@ export async function signUpUser(prevState: unknown, formData: FormData) {
 
 // get user ID from session
 export async function getUserById(userId: string) {
- const user = await prisma.user.findFirst({
-  where: {
-    id: userId, 
-  }, 
- })
- if(!user) {
-   throw new Error("User not found")
- }
+  const user = await prisma.user.findFirst({
+    where: {
+      id: userId,
+    },
+  });
+  if (!user) {
+    throw new Error("User not found");
+  }
   return user;
 }
 
 // update users address
-export async function updateUserAddress(data:shippingAddressType) {
+export async function updateUserAddress(data: shippingAddressType) {
   try {
     const session = await auth();
-    const currentUser =  await prisma.user.findFirst({
-      where:{id:session?.user?.id}
-    })
-    if(!currentUser) throw new Error("User not found")
-      const address = shippingAddressSchema.parse(data);
+    const currentUser = await prisma.user.findFirst({
+      where: { id: session?.user?.id },
+    });
+    if (!currentUser) throw new Error("User not found");
+    const address = shippingAddressSchema.parse(data);
     await prisma.user.update({
       where: { id: currentUser.id },
       data: {
         address: address,
       },
     });
-    return {success: true, message: "Address updated successfully"}
-
+    return { success: true, message: "Address updated successfully" };
   } catch (error) {
-    return {success: false, message: formatError(error)}
+    return { success: false, message: formatError(error) };
+  }
+}
+
+// updated users payment method
+
+export async function updateUserPaymentMethod(
+  data: z.infer<typeof paymentMethodSchema>
+) {
+  try {
+    const session = await auth();
+    const currentUser = await prisma.user.findFirst({
+      where: { id: session?.user?.id },
+    });
+    if (!currentUser) throw new Error("User not found");
+    const paymentMethod = paymentMethodSchema.parse(data);
+    await prisma.user.update({
+      where: { id: currentUser.id },
+      data: {
+        paymentMethod: paymentMethod.type,
+      },
+    });
+    return { success: true, message: "Payment method updated successfully" };
+  } catch (error) {
+    return { success: false, message: formatError(error) };
   }
 }
