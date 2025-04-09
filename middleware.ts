@@ -1,20 +1,30 @@
-import { auth } from "@/auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth"; // this should point to lightweight config
 
-export default async function middleware(req: Request) {
-  const session = await auth(); // only if needed
-  const url = new URL(req.url);
+const protectedPaths = [
+  /^\/shipping-address/,
+  /^\/payment-method/,
+  /^\/place-order/,
+  /^\/profile/,
+  /^\/user\/.*/,
+  /^\/order\/.*/,
+  /^\/admin/,
+];
 
-  const protectedPaths = [/\/admin/, /\/profile/, /\/checkout/];
-  const isProtected = protectedPaths.some((p) => p.test(url.pathname));
+export default auth((req:NextRequest) => {
+  const { pathname } = req.nextUrl;
 
-  if (isProtected && !session) {
+  const isProtected = protectedPaths.some((regex) => regex.test(pathname));
+
+  if (!req.headers.get("authorization") && isProtected) {
     return NextResponse.redirect(new URL("/sign-in", req.url));
   }
 
+  // Only handle cookie generation in full server-side logic (NOT HERE)
+
   return NextResponse.next();
-}
+});
 
 export const config = {
-  matcher: ["/admin/:path*", "/profile", "/checkout"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
