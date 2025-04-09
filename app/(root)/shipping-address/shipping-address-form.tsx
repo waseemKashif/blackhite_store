@@ -182,7 +182,7 @@ const ShippingAddressForm = ({ address }: { address: shippingAddressType }) => {
                   <FormItem className=" w-full">
                     <FormLabel>Postal Code</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter Postal Code" {...field} type="number"/>
+                      <Input placeholder="Enter Postal Code" {...field} value={field.value ?? ''} type="number"/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

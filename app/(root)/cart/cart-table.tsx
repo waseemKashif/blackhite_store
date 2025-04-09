@@ -19,7 +19,6 @@ import { LoaderCircle, Minus, Plus, ArrowRight } from "lucide-react";
 import ProuductPrice from "@/components/shared/product/product-price";
 import { formatCurrency } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
-import { Item } from "@radix-ui/react-dropdown-menu";
 
 const CartTable = ({ cart }: { cart?: Cart }) => {
   const router = useRouter();

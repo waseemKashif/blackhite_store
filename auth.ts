@@ -55,7 +55,8 @@ export const config = {
     }),
   ],
   callbacks: {
-    async session({ session, user, trigger, token }: any) {
+    async session({ session, user, trigger, token }: any){// eslint-disable-line @typescript-eslint/no-explicit-any
+
       // set the user id from the token
       session.user.id = token.sub;
       session.user.role = token.role;
@@ -66,7 +67,8 @@ export const config = {
       }
       return session;
     },
-    async jwt({ token, user, trigger, session }): any {
+
+    async jwt({ token, user, trigger }:any) {// eslint-disable-line @typescript-eslint/no-explicit-any
       // assign user fields to the token
       if (user) {
         token.id = user.id;
@@ -114,7 +116,7 @@ export const config = {
       }
       return token;
     },
-    authorized({ request, auth}: any) {
+    authorized({ request, auth }: any){// eslint-disable-line @typescript-eslint/no-explicit-any
       // create an array with regular expressions of paths we want to protect.
       const protectedPaths = [
         /\/shipping-address/,
@@ -126,9 +128,9 @@ export const config = {
         /\/admin/,
       ];
       // get path name from the request URL object
-      const {pathname} = request.nextUrl;
-      // check if the user is authenticated and the path is protected 
-      if (!auth && protectedPaths.some((p)=> p.test(pathname))) return false;
+      const { pathname } = request.nextUrl;
+      // check if the user is authenticated and the path is protected
+      if (!auth && protectedPaths.some((p) => p.test(pathname))) return false;
 
       // check for session cart cookie
       if (!request.cookies.get("sessionCartId")) {

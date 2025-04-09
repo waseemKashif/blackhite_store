@@ -8,7 +8,7 @@ const CartPage = async () => {
   const cart = await getMyCart();
   return (
     <>
-      <CartTable cart={cart} />
+      <CartTable cart={cart ? { ...cart, totalPrice: cart.totalPrice.toString() } : undefined} />
     </>
   );
 };
