@@ -7,7 +7,7 @@ import {
   paymentMethodSchema,
 } from "../validators";
 import { z } from "zod";
-import { auth, signIn, signOut } from "@/auth";
+import { auth, signIn, signOut } from "@/auth_copy_lightweight";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { hashSync } from "bcrypt-ts-edge";
 import { prisma } from "@/db/prisma";

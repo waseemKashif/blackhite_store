@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { auth } from "@/auth";
+import { auth } from "@/auth_copy_lightweight";
 import { signOutUser } from "@/lib/actions/user.actions";
 import {
   DropdownMenu,

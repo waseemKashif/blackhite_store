@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/auth_copy_lightweight";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
