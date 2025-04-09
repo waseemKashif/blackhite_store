@@ -5,7 +5,6 @@ import CredentialsProviders from "next-auth/providers/credentials";
 import { compareSync } from "bcrypt-ts-edge";
 import type { NextAuthConfig } from "next-auth";
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
 export const config = {
   pages: {
     signIn: "/sign-in",
@@ -115,43 +114,6 @@ export const config = {
         }
       }
       return token;
-    },
-    authorized({ request, auth }: any){// eslint-disable-line @typescript-eslint/no-explicit-any
-      // create an array with regular expressions of paths we want to protect.
-      const protectedPaths = [
-        /\/shipping-address/,
-        /\/payment-method/,
-        /\/place-order/,
-        /\/profile/,
-        /\/user\/(.*)/,
-        /\/order\/(.*)/,
-        /\/admin/,
-      ];
-      // get path name from the request URL object
-      const { pathname } = request.nextUrl;
-      // check if the user is authenticated and the path is protected
-      if (!auth && protectedPaths.some((p) => p.test(pathname))) return false;
-
-      // check for session cart cookie
-      if (!request.cookies.get("sessionCartId")) {
-        // if not found, generate a new cart id cookie
-        const sessionCartId = crypto.randomUUID();
-
-        // clone request headers
-        const newResquestHeaders = new Headers(request.headers);
-
-        // create a new response with the new cookie
-        const response = NextResponse.next({
-          request: {
-            headers: newResquestHeaders,
-          },
-        });
-        // set newly generated sessionCartId in the response cookie
-        response.cookies.set("sessionCartId", sessionCartId);
-        return response;
-      } else {
-        return true;
-      }
     },
   },
 } satisfies NextAuthConfig;
