@@ -9,7 +9,7 @@ import { APP_NAME } from "@/lib/constants";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { auth } from "@/auth_copy_lightweight";
+import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import SignUpForm from "./sign-up-form";
 export const metadata: Metadata = {

@@ -9,16 +9,27 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import UserButton from "./user-button-avatar";
+import { Badge } from "@/components/ui/badge";
+import { getMyCart } from "@/lib/actions/cart.actions";
+const Menu = async () => {
+const cart = await getMyCart();
+const totalItems = cart?.items?.length ?? 0;
 
-const Menu = () => {
   return (
     <div className="flex  justify-end gap-3">
       <nav className=" hidden md:flex w-full max-w-xs gap-1">
         <ModeToggle />
         <Button asChild variant="ghost">
-          <Link href="/cart">
+          <Link href="/cart" className="relative">
             <ShoppingCart />
             Cart
+            {totalItems && totalItems > 0 ? (
+              <Badge variant="destructive" className=" absolute top-0 right-0">
+                {cart?.items.reduce((acc, item) => acc + item.qty, 0)} 
+              </Badge>
+            ) : (
+              ""
+            )}
           </Link>
         </Button>
         <UserButton />

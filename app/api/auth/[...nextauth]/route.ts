@@ -1,3 +1,3 @@
-import { handlers } from "@/auth_copy_lightweight";
+import { handlers } from "@/auth";
 
 export const {GET,POST} = handlers
