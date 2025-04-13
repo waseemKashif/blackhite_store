@@ -124,3 +124,12 @@ export const paymentMethodSchema = z
     }),
     shippingAddress: shippingAddressSchema,
   })
+
+  export const insertOrderItemSchema = z.object({
+    productId: z.string(),
+    slug: z.string(),
+    name: z.string(),
+    image: z.string(),
+    price: currency,
+    qty: z.number().int().nonnegative("Quantity must be a positive number"),
+  })
