@@ -179,17 +179,23 @@ const PlaceOrderPage = async () => {
           <Card>
             <CardContent className=" p-4 space-y-4 gap-4">
               <div className=" flex  justify-between">
-                <div>items</div>
+                <div>items Price</div>
                 <div>{formatCurrency(cart.itemsPrice)}</div>
               </div>
               <div className=" flex  justify-between">
                 <div>Shipping Price</div>
                 <div>{formatCurrency(cart.shippingPrice)}</div>
               </div>
-              <div className=" flex  justify-between">
-                <div>Discount</div>
-                <div>{formatCurrency(cart.itemsPrice)}</div>
-              </div>
+              {cart.discountedPrice && Number(cart.discountedPrice) > 0 && (
+                <div className=" flex  justify-between">
+                  <div>Discount</div>
+                  <div>
+                    {formatCurrency(
+                      cart.discountedPrice ? cart.discountedPrice : ""
+                    )}
+                  </div>
+                </div>
+              )}
               <div className=" flex  justify-between">
                 <div>Total</div>
                 <div>{formatCurrency(cart.totalPriceotal)}</div>
