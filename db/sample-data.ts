@@ -1,18 +1,18 @@
-import {hashSync} from 'bcrypt-ts-edge'
+import { hashSync } from "bcrypt-ts-edge";
 const sampleData = {
-  users:[
+  users: [
     {
-      name: 'Waseem',
-      email: 'waseemkashif7@gmail.com',
-      password: hashSync('12345678',10),
-      role: 'admin'
+      name: "Waseem",
+      email: "waseemkashif7@gmail.com",
+      password: hashSync("12345678", 10),
+      role: "admin",
     },
     {
-      name: 'aqif',
-      email: 'waseemqulandar@gmail.com',
-      password: hashSync('12341234',10),
-      role: 'user'
-    }
+      name: "aqif",
+      email: "waseemqulandar@gmail.com",
+      password: hashSync("12341234", 10),
+      role: "user",
+    },
   ],
   products: [
     {
@@ -86,6 +86,23 @@ const sampleData = {
       banner: null,
     },
     {
+      name: "Polo Classic Pink Hoodie",
+      slug: "polo-classic-pink-hoodie",
+      category: "Men's Sweatshirts",
+      description: "Soft, stylish, and perfect for laid-back days",
+      images: [
+        "/images/sample-products/p6-1.jpg",
+        "/images/sample-products/p6-2.jpg",
+      ],
+      regularPrice: "99.7",
+      brand: "Polo",
+      rating: 4.6,
+      numReviews: 12,
+      stock: 8,
+      isFeatured: true,
+      banner: null,
+    },
+    {
       name: "Polo Ralph Lauren Oxford Shirt",
       slug: "polo-ralph-lauren-oxford-shirt",
       category: "Men's Dress Shirts",
@@ -103,19 +120,44 @@ const sampleData = {
       banner: null,
     },
     {
-      name: "Polo Classic Pink Hoodie",
-      slug: "polo-classic-pink-hoodie",
-      category: "Men's Sweatshirts",
-      description: "Soft, stylish, and perfect for laid-back days",
-      images: [
-        "/images/sample-products/p6-1.jpg",
-        "/images/sample-products/p6-2.jpg",
-      ],
-      regularPrice: "99.7",
-      brand: "Polo",
-      rating: 4.6,
+      name: "Iphone 16 pro max (8GB RAM, 256GB)",
+      slug: "iphone-16-pro-max",
+      category: "Mobile Phones",
+      description: "Latest iPhone with advanced features",
+      images: ["/images/sample-products/iphone16promax.jpg"],
+      regularPrice: "4199.00",
+      brand: "apple",
+      rating: 4.7,
       numReviews: 12,
-      stock: 8,
+      stock: 2,
+      isFeatured: true,
+      banner: null,
+    },
+    {
+      name: "Apple Iphone 13 (4GB RAM, 256GB)",
+      slug: "apple-iphone-13",
+      category: "Mobile Phones",
+      description: "Latest iPhone with advanced features and great camera",
+      images: ["/images/sample-products/iphone13.jpg"],
+      regularPrice: "1699.00",
+      brand: "apple",
+      rating: 3.7,
+      numReviews: 12,
+      stock: 5,
+      isFeatured: true,
+      banner: null,
+    },
+    {
+      name: "Apple Watch Series 7",
+      slug: "apple-watch-series-7",
+      category: "apple smart watches",
+      description: "Latest Apple Watch with advanced health features",
+      images: ["/images/sample-products/appleWach.jpg"],
+      regularPrice: "4299.00",
+      brand: "apple",
+      rating: 4.7,
+      numReviews: 12,
+      stock: 2,
       isFeatured: true,
       banner: null,
     },

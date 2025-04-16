@@ -10,10 +10,6 @@ import { Prisma } from "@prisma/client";
 
 // CALCLATE CART PRICES
 const calcPrices = (items: CartItem[]) => {
-  const itemsPrice = round2(
-      items.reduce((acc, item) => acc + Number(item.regularPrice) * item.qty, 0)
-    ),
-    shippingPrice = itemsPrice > 100 ? 0 : 20;
   const discountedPrice =
     items.reduce(
       (acc, item) =>
@@ -24,8 +20,13 @@ const calcPrices = (items: CartItem[]) => {
           : 0),
       0
     ) || 0;
+  const itemsPrice =
+    round2(
+      items.reduce((acc, item) => acc + Number(item.regularPrice) * item.qty, 0)
+    ) - discountedPrice;
+  const shippingPrice = itemsPrice > 100 ? 0 : 20;
   // taxPrice = round2(itemsPrice * 0.15),
-  const totalPrice = round2(itemsPrice + shippingPrice - discountedPrice);
+  const totalPrice = round2(itemsPrice + shippingPrice );
   return {
     itemsPrice: itemsPrice.toFixed(2),
     shippingPrice: shippingPrice.toFixed(2),
