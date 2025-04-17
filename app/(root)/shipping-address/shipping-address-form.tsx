@@ -1,6 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ControllerRenderProps, useForm,SubmitHandler } from "react-hook-form";
+import { ControllerRenderProps, useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
@@ -22,28 +22,29 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Loader } from "lucide-react";
 import { updateUserAddress } from "@/lib/actions/user.actions";
 
-
 const ShippingAddressForm = ({ address }: { address: shippingAddressType }) => {
   const router = useRouter();
-  const {toast} = useToast();
+  const { toast } = useToast();
   // 1. Define your form.
   const form = useForm<z.infer<typeof shippingAddressSchema>>({
     resolver: zodResolver(shippingAddressSchema),
-    defaultValues: address || shippingAddressDefaultValues,
+    defaultValues: { ...address, ...shippingAddressDefaultValues },
   });
   const [isPending, startTransition] = useTransition();
-  const onSubmit:SubmitHandler<z.infer<typeof shippingAddressSchema>> = async (values) => {
-    startTransition(async()=>{
-        const res = await updateUserAddress(values);
-        if (res.success) {
-            toast({ variant: "default", description: res.message });
-            router.push("/payment-method");
-            } else {
-            toast({ variant: "destructive", description: res.message });
-            }
+  const onSubmit: SubmitHandler<z.infer<typeof shippingAddressSchema>> = async (
+    values
+  ) => {
+    startTransition(async () => {
+      const res = await updateUserAddress(values);
+      if (res.success) {
+        toast({ variant: "default", description: res.message });
+        router.push("/payment-method");
+      } else {
+        toast({ variant: "destructive", description: res.message });
+      }
     });
   };
-  
+
   return (
     <>
       <div className="mx-auto max-w-md space-y-4">
@@ -94,7 +95,11 @@ const ShippingAddressForm = ({ address }: { address: shippingAddressType }) => {
                   <FormItem className=" w-full">
                     <FormLabel>Phone No</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter phone no" {...field}  type="number"/>
+                      <Input
+                        placeholder="Enter phone no"
+                        {...field}
+                        type="number"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -182,7 +187,12 @@ const ShippingAddressForm = ({ address }: { address: shippingAddressType }) => {
                   <FormItem className=" w-full">
                     <FormLabel>Postal Code</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter Postal Code" {...field} value={field.value ?? ''} type="number"/>
+                      <Input
+                        placeholder="Enter Postal Code"
+                        {...field}
+                        value={field.value ?? ""}
+                        type="number"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -201,7 +211,7 @@ const ShippingAddressForm = ({ address }: { address: shippingAddressType }) => {
                     "isDefault"
                   >;
                 }) => (
-                  <FormItem className=" w-full flex items-baseline gap-3"> 
+                  <FormItem className=" w-full flex items-baseline gap-3">
                     <FormLabel>Default Address</FormLabel>
                     <FormControl>
                       <Switch
