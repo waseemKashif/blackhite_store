@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Product } from "@/types";
+import {  Product } from "@/types";
 import ProductCheckStock from "./product-checkStock";
-
-const ProductCard = ({ product }: { product: Product }) => {
- 
+import AddToCart from "./add-to-cart";
+import { getMyCart } from "@/lib/actions/cart.actions";
+const ProductCard = async ({ product }: { product: Product }) => {
+  const cart = await getMyCart();
   return (
     <Card className=" w-full max-w-sm">
       <CardHeader className=" p-0  items-center ">
@@ -34,6 +35,26 @@ const ProductCard = ({ product }: { product: Product }) => {
           product={product}
           discountClass=" text-destructive font-bold"
         />
+      {product.stock > 0 && (
+        <div className=" flex-center">
+          <AddToCart
+            cart={
+              cart
+                ? { ...cart, totalPrice: cart.totalPrice.toString() }
+                : undefined
+            }
+            item={{
+              productId: product.id,
+              name: product.name,
+              slug: product.slug,
+              regularPrice: product.regularPrice,
+              qty: 1,
+              image: product.images[0],
+              discountedPrice: product.discountedPrice || product.regularPrice,
+            }}
+          />
+        </div>
+      )}
       </CardContent>
     </Card>
   );

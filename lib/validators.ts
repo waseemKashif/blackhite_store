@@ -76,6 +76,7 @@ export const insertCartSchema = z.object({
   itemsPrice: currency,
   totalPrice: currency,
   shippingPrice: currency,
+  discountedPrice: z.string().optional().nullable(),
   // taxPrice: currency.optional()
   //   .nullable(),
   sessionCartId: z.string().min(1, "session cart id is required"),
@@ -85,7 +86,11 @@ export const insertCartSchema = z.object({
 // schema for adding user shipping address
 export const shippingAddressSchema = z.object({
   fullName: z.string().min(3, "Name must be at least 3 characters"),
-  phone: z.string().min(8, "Phone number must be at least 8 characters"),
+  phone: z
+    .string()
+    .min(8, "Phone number must be at least 8 digits")
+    .max(8, "Phone number must be at most 8 digits")
+    .regex(/^\d+$/, "Only digits allowed"),
   // fullAddress: z.string().min(3, "Full address must be at least 3 characters"),
   streetAddress: z
     .string()
@@ -113,14 +118,23 @@ export const paymentMethodSchema = z
     message: "Invalid payment method",
   });
 
-  // schema for inserting an order 
-  export const insertOrderSchema = z.object({
-    userId : z.string().min(1,'user is required'),
-    itemsPrice : currency,
-    shippingPrice : currency,
-    totalPrice : currency,
-    paymentMethod : z.string().refine((data)=> PAYMENT_METHODS.includes(data),{
-      message:'Invalid Payment method'
-    }),
-    shippingAddress: shippingAddressSchema,
-  })
+// schema for inserting an order
+export const insertOrderSchema = z.object({
+  userId: z.string().min(1, "user is required"),
+  itemsPrice: currency,
+  shippingPrice: currency,
+  totalPrice: currency,
+  paymentMethod: z.string().refine((data) => PAYMENT_METHODS.includes(data), {
+    message: "Invalid Payment method",
+  }),
+  shippingAddress: shippingAddressSchema,
+});
+
+export const insertOrderItemSchema = z.object({
+  productId: z.string(),
+  slug: z.string(),
+  name: z.string(),
+  image: z.string(),
+  price: currency,
+  qty: z.number().int().nonnegative("Quantity must be a positive number"),
+});
