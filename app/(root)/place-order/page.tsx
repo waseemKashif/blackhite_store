@@ -1,3 +1,4 @@
+import PlaceOrderForm from "./place-order-form";
 import { auth } from "@/auth";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import { getUserById } from "@/lib/actions/user.actions";
@@ -200,6 +201,7 @@ const PlaceOrderPage = async () => {
                 <div>Total</div>
                 <div>{formatCurrency(cart.totalPriceotal)}</div>
               </div>
+              <PlaceOrderForm />
             </CardContent>
           </Card>
         </div>
