@@ -1,7 +1,7 @@
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { PrismaNeon } from '@prisma/adapter-neon';
-import { PrismaClient } from '@prisma/client';
-import ws from 'ws';
+import { Pool, neonConfig } from "@neondatabase/serverless";
+import { PrismaNeon } from "@prisma/adapter-neon";
+import { PrismaClient } from "@prisma/client";
+import ws from "ws";
 
 // Sets up WebSocket connections, which enables Neon to use WebSocket communication.
 neonConfig.webSocketConstructor = ws;
@@ -17,9 +17,80 @@ const adapter = new PrismaNeon(pool);
 export const prisma = new PrismaClient({ adapter }).$extends({
   result: {
     product: {
+      regularPrice: {
+        compute(product) {
+          return product?.regularPrice?.toString();
+        },
+      },
+      discountedPrice: {
+        compute(product) {
+          return product?.discountedPrice?.toString();
+        },
+      },
       rating: {
         compute(product) {
           return product?.rating?.toString();
+        },
+      },
+    },
+    cart: {
+      itemsPrice: {
+        needs: { itemsPrice: true },
+        compute(cart) {
+          return cart?.itemsPrice?.toString();
+        },
+      },
+      shippingPrice: {
+        needs: { shippingPrice: true },
+        compute(cart) {
+          return cart?.shippingPrice?.toString();
+        },
+      },
+      totalPrice: {
+        needs: { totalPrice: true },
+        compute(cart) {
+          return cart?.totalPrice?.toString();
+        },
+      },
+      discountedPrice: {
+        needs: { discountedPrice: true },
+        compute(cart) {
+          return cart?.discountedPrice?.toString();
+        },
+      },
+    },
+    order: {
+      itemsPrice: {
+        needs: { itemsPrice: true },
+        compute(cart) {
+          return cart?.itemsPrice?.toString();
+        },
+      },
+      shippingPrice: {
+        needs: { shippingPrice: true },
+        compute(cart) {
+          return cart?.shippingPrice?.toString();
+        },
+      },
+      totalPrice: {
+        needs: { totalPrice: true },
+        compute(cart) {
+          return cart?.totalPrice?.toString();
+        },
+      },
+     
+    },
+    orderItem: {
+      regularPrice: {
+        needs: { regularPrice: true },
+        compute(orderItem) {
+          return orderItem?.regularPrice?.toString();
+        },
+      },
+      discountedPrice: {
+        needs: { discountedPrice: true },
+        compute(orderItem) {
+          return orderItem?.discountedPrice?.toString();
         },
       },
     },

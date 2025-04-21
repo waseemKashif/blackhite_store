@@ -29,7 +29,7 @@ export type orderType = z.infer<typeof insertOrderSchema> & {
   isDelivered: boolean;
   paidAt: Date | null;
   deliveredAt: Date | null;
-  orderItems: orderItemType[];
+  orderitems: orderItemType[];
   shippingAddress: shippingAddressType;
   user:{name:string,email:string}
 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import ImageCard from "../imageCard";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {  Product } from "@/types";
 import ProductCheckStock from "./product-checkStock";
@@ -11,13 +11,11 @@ const ProductCard = async ({ product }: { product: Product }) => {
     <Card className=" w-full max-w-sm">
       <CardHeader className=" p-0  items-center ">
         <Link href={`/product/${product.slug}`}>
-          <Image
-            src={product.images[0]}
+          <ImageCard
+          images={product.images}
             alt={product.name}
-            height={300}
+           height={300}
             width={300}
-            priority={true}
-            className=" rounded-md"
           />
         </Link>
       </CardHeader>
