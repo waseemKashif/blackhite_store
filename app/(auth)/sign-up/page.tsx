@@ -23,7 +23,6 @@ const SignUpPage = async (props: {
   const { callbackUrl } = await props.searchParams;
   const session = await auth();
   if (session) {
-    console.log("you are logged In..");
     return redirect(callbackUrl || "/");
   }
   return (
@@ -32,9 +31,9 @@ const SignUpPage = async (props: {
         <CardHeader className=" space-y-4">
           <Link href="/" title="Home page" className=" flex-center">
             <Image
-              src="/images/ah_logo.svg"
-              width={100}
-              height={100}
+              src="/images/ansarGallerylogo.png"
+              width={200}
+              height={200}
               alt={`${APP_NAME} logo`}
               priority={true}
             />

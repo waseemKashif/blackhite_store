@@ -18,7 +18,6 @@ const PlaceOrderForm = () => {
     //   alert(formatError(message) || "Something went wrong");
     // }
     const res = await createOrder();
-    console.log("res", res);
     if (res.redirectTo) {
       router.push(res.redirectTo);
     }

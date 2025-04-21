@@ -126,7 +126,7 @@ model Order {
 
   //  right now the user must have to login to make order. 
   // guest order is not allowed. we can add it later. 
-  OrderItem OrderItem[]
+  orderitems OrderItem[]
 }
 
 model OrderItem {

@@ -6,6 +6,7 @@ import { getUserById } from "./user.actions";
 import { CartItem, shippingAddressType } from "@/types";
 import { prisma } from "@/db/prisma";
 import { insertOrderSchema } from "../validators";
+import { convertToPlainObject } from "../utils";
 
 // create order and create the order items
 
@@ -48,14 +49,13 @@ export async function createOrder() {
     // validations end for inital order creation
 
     // create order object
-    const order = await insertOrderSchema.parse({
+    const order = insertOrderSchema.parse({
       userId: user.id,
       shippingAddress: userAddress,
       paymentMethod: user.paymentMethod,
       itemsPrice: cart.itemsPrice,
       shippingPrice: cart.shippingPrice,
       totalPrice: cart.totalPrice,
-      // items: cart.items,
     });
     // create a transtaction to create order and order items in the database
 
@@ -96,7 +96,7 @@ export async function createOrder() {
     return {
       success: true,
       message: "Order created successfully",
-      redirectTo: `/orders/${insertedOrderId}`,
+      redirectTo: `/order/${insertedOrderId}`,
     };
   } catch (error) {
     if (isRedirectError(error)) throw error;
@@ -105,4 +105,23 @@ export async function createOrder() {
       message: `Something went wrong and ${error}`,
     };
   }
+}
+
+// get order by id
+export async function getOrderById(orderId: string) {
+  const data = await prisma.order.findFirst({
+    where: {
+      id: orderId,
+    },
+    include: {
+      orderitems: true,
+      user: {
+        select: {
+          name: true,
+          email: true,
+        },
+      },
+    },
+  });
+  return convertToPlainObject(data);
 }

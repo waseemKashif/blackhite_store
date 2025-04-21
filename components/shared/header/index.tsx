@@ -10,19 +10,19 @@ const Header = () => {
         <div className="flex-start">
           <Link href="/" className="flex-start">
             <Image
-              src="/images/ah_logo.svg"
+              src="/images/ansarGallerylogo.png"
               alt={`${APP_NAME} logo`}
-              height={100}
-              width={100}
+              height={200}
+              width={200}
               priority={true}
             />
-            <h1 className="hidden text-2xl font-bold lg:block ml-3">
+            {/* <h1 className="hidden text-2xl font-bold lg:block ml-3">
               {APP_NAME}
-            </h1>
+            </h1> */}
           </Link>
         </div>
         <div className="space-x-2">
-        <Menu/>
+          <Menu />
         </div>
       </div>
     </header>
