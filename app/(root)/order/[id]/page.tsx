@@ -18,7 +18,6 @@ const OrderDetailsPage = async (props: { params: Promise<{ id: string }> }) => {
   // const shippingAddress = order.shippingAddress as shippingAddressType;
   return (
     <div>
-      details {id} <br />
       <OrderDetailsTable
         order={{
           ...order,
