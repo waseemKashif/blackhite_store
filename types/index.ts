@@ -5,7 +5,7 @@ import {
   cartItemSchema,
   shippingAddressSchema,
   insertOrderSchema,
-  insertOrderItemSchema
+  insertOrderItemSchema,
 } from "@/lib/validators";
 
 export type Product = z.infer<typeof insertProductSchema> & {
@@ -20,7 +20,7 @@ export type CartItem = z.infer<typeof cartItemSchema>;
 
 export type shippingAddressType = z.infer<typeof shippingAddressSchema>;
 
-export type orderItemType = z.infer<typeof insertOrderItemSchema>
+export type orderItemType = z.infer<typeof insertOrderItemSchema>;
 
 export type orderType = z.infer<typeof insertOrderSchema> & {
   id: string;
@@ -31,5 +31,17 @@ export type orderType = z.infer<typeof insertOrderSchema> & {
   deliveredAt: Date | null;
   orderitems: orderItemType[];
   shippingAddress: shippingAddressType;
-  user:{name:string,email:string}
-}
+  user: { name: string; email: string };
+};
+export type bannersType = {
+  webImage: string;
+  mobImage: string;
+  alt: string;
+};
+export type categoryType = {
+  name: string;
+  urlKey: string;
+  icon: string;
+  title: string;
+  description: string;
+};

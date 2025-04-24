@@ -19,8 +19,8 @@ const ProductCard = async ({ product }: { product: Product }) => {
           />
         </Link>
       </CardHeader>
-      <CardContent className="p-3 sm:p-6">
-        <div className=" text-xs">{product.brand}</div>
+      <CardContent className="p-1 md:p-4">
+        <div className=" text-xs w-fit bg-blue-500  text-white rounded-e-md px-1 py-[2px]">{product.brand}</div>
         <Link href={`/product/${product.slug}`}>
           <h2
             className="text-sm font-medium overflow-ellipsis line-clamp-2 h-11"

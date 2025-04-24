@@ -1,12 +1,29 @@
 import { getProductBySlug } from "@/lib/actions/product.actions";
 import { notFound } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
+import { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
 import ProductCheckStock from "@/components/shared/product/product-checkStock";
 import ProuductPrice from "@/components/shared/product/product-price";
 import ProductImages from "@/components/shared/product/product-images";
 import AddToCart from "@/components/shared/product/add-to-cart";
 import { getMyCart } from "@/lib/actions/cart.actions";
+type Props = {
+  params: {
+    slug: string;
+  };
+};
+export async function generateMetadata(props : Props): Promise<Metadata> {
+  const { slug } = await props.params;
+  const title = `${
+    slug.charAt(0).toUpperCase() + slug.slice(1) 
+  } | Ansar Gallery`;
+
+  return {
+    title,
+  };
+}
+
 const ProductDetailsPage = async (props: {
   params: Promise<{ slug: string }>;
 }) => {
@@ -96,7 +113,11 @@ const ProductDetailsPage = async (props: {
                 {product.stock > 0 && (
                   <div className=" flex-center">
                     <AddToCart
-                    cart={cart ? { ...cart, totalPrice: cart.totalPrice.toString() } : undefined}
+                      cart={
+                        cart
+                          ? { ...cart, totalPrice: cart.totalPrice.toString() }
+                          : undefined
+                      }
                       item={{
                         productId: product.id,
                         name: product.name,
@@ -104,7 +125,8 @@ const ProductDetailsPage = async (props: {
                         regularPrice: product.regularPrice,
                         qty: 1,
                         image: product.images[0],
-                        discountedPrice: product.discountedPrice || product.regularPrice,
+                        discountedPrice:
+                          product.discountedPrice || product.regularPrice,
                       }}
                     />
                   </div>
