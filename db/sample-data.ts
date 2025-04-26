@@ -14,6 +14,52 @@ const sampleData = {
       role: "user",
     },
   ],
+  banners: [
+    {
+      webImage: "/images/desktop-banner.jpg",
+      mobImage: "/images/mobile-banner.jpg",
+      alt: "online exclusive",
+    },
+    {
+      webImage: "/images/weekend-offers-web-en.jpg",
+      mobImage: "/images/weekend-offers-mob-en.jpg",
+      alt: "weekend offers",
+    },
+  ],
+  categories: [
+    {
+      name: "Grocery",
+      urlKey: "Groceries",
+      icon: "/images/categories/grocery.png",
+      title: "Grocery Shopping",
+      description:
+        " Buy grocery online in Qatar at best price for the convenience of express order delivery with www.ansargallery.com . Explore the variety from cooking, baking to fresh produce and dairy products in our online grocery shopping store. ✓ Express Delivery of Orders ✓ COD ✓ Card Payment. Shop grocery now",
+    },
+    {
+      name: "Mobile-Phones",
+      urlKey: "Mobile-Phones",
+      icon: "/images/categories/mobile-phone.png",
+      title: "Mobile Phone Shopping",
+      description:
+        " Buy Mobile-Phones online in Qatar at best price for the convenience of express order delivery with www.ansargallery.com . Explore the variety from cooking, baking to fresh produce and dairy products in our online grocery shopping store. ✓ Express Delivery of Orders ✓ COD ✓ Card Payment. Shop grocery now",
+    },
+    {
+      name: "Electronics",
+      urlKey: "electronics",
+      icon: "/images/categories/Electronics.png",
+      title: "electronics Shopping",
+      description:
+        " Buy electronics online in Qatar at best price for the convenience of express order delivery with www.ansargallery.com . Explore the variety from cooking, baking to fresh produce and dairy products in our online grocery shopping store. ✓ Express Delivery of Orders ✓ COD ✓ Card Payment. Shop grocery now",
+    },
+    {
+      name: "Beauty & Care",
+      urlKey: "beauty_care",
+      icon: "/images/categories/beauty_care.png",
+      title: "beauty_care Shopping",
+      description:
+        " Buy Beauty and Care online in Qatar at best price for the convenience of express order delivery with www.ansargallery.com . Explore the variety from cooking, baking to fresh produce and dairy products in our online grocery shopping store. ✓ Express Delivery of Orders ✓ COD ✓ Card Payment. Shop grocery now",
+    },
+  ],
   products: [
     {
       name: "Polo Sporting Stretch Shirt",
@@ -122,7 +168,7 @@ const sampleData = {
     {
       name: "Iphone 16 pro max (8GB RAM, 256GB)",
       slug: "iphone-16-pro-max",
-      category: "Mobile Phones",
+      category: "Mobile-Phones",
       description: "Latest iPhone with advanced features",
       images: ["/images/sample-products/iphone16promax.jpg"],
       regularPrice: "4199.00",
@@ -136,7 +182,7 @@ const sampleData = {
     {
       name: "Apple Iphone 13 (4GB RAM, 256GB)",
       slug: "apple-iphone-13",
-      category: "Mobile Phones",
+      category: "Mobile-Phones",
       description: "Latest iPhone with advanced features and great camera",
       images: ["/images/sample-products/iphone13.jpg"],
       regularPrice: "1699.00",

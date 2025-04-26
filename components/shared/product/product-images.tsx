@@ -14,12 +14,13 @@ const [current,setCurrent] = useState(0);
           width={1000}
           height={1000}
           className=" min-h-[300px] object-cover object-center"
+          loading="lazy"
         />
         <div className="flex">
             {
                 images.map((image,index)=>(
                     <div key={image} role="button" tabIndex={0} onClick={()=>setCurrent(index)} className={cn(' border mr-2  cursor-pointer hover:border-orange-600', current === index && 'border-orange-500')}>
-                        <Image src={image} alt="image" width={100} height={100}/>
+                        <Image src={image} alt="image" width={100} height={100} loading="lazy" />
                     </div>
                 ))
             }
