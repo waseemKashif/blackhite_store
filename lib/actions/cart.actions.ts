@@ -26,7 +26,7 @@ const calcPrices = (items: CartItem[]) => {
     ) - discountedPrice;
   const shippingPrice = itemsPrice > 100 ? 0 : 20;
   // taxPrice = round2(itemsPrice * 0.15),
-  const totalPrice = round2(itemsPrice + shippingPrice );
+  const totalPrice = round2(itemsPrice + shippingPrice);
   return {
     itemsPrice: itemsPrice.toFixed(2),
     shippingPrice: shippingPrice.toFixed(2),
@@ -186,6 +186,40 @@ export async function removeItemFromCart(productId: string) {
     return {
       success: true,
       message: `${product.name} removed from cart`,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: formatError(error),
+    };
+  }
+}
+
+// remove all items from the cart
+export async function removeAllItemsFromCart() {
+  try {
+    // check for cart cookie
+    const sessionCartId = (await cookies()).get("sessionCartId")?.value;
+    if (!sessionCartId) throw new Error("Cart Session not found");
+    const cart = await getMyCart();
+    if (!cart) throw new Error("Cart not found");
+    if (cart.items?.length < 0) {
+      throw new Error("No items in cart");
+    }
+    // Clear all items from the cart
+    cart.items = [];
+    // Update the cart in the database
+    await prisma.cart.update({
+      where: { id: cart.id },
+      data: {
+        items: cart.items as Prisma.CartUpdateitemsInput[],
+        ...calcPrices(cart.items as CartItem[]),
+      },
+    });
+
+    return {
+      success: true,
+      message: "All items removed from cart",
     };
   } catch (error) {
     return {

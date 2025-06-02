@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
       <Button variant="ghost" onClick={() => setRequested(!requested)} className={className} >
      
         {requested ? (
-          <>
+          <p className=" flex flex-nowrap gap-1">
             <Check /> Requested
-          </>
+          </p>
         ) : (
           "Make Request"
         )}
